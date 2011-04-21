@@ -13,6 +13,26 @@ describe UsersController do
       get 'new'
       response.should have_selector("title", :content => "Sign up")
     end
+
+    it "should have a name field" do
+      get :new
+      response.should have_selector('input[name="user[name]"][type="text"]')
+    end
+
+    it "should have an email field" do
+      get :new
+      response.should have_selector('input[name="user[email]"][type="text"]')
+    end
+
+    it "should have a password field" do
+      get :new
+      response.should have_selector('input[name="user[password]"][type="password"]')
+    end
+
+    it "should have a password confirmation field" do
+      get :new
+      response.should have_selector('input[name="user[password_confirmation]"][type="password"]')
+    end
   end
 
   describe "GET 'show'" do
@@ -67,6 +87,12 @@ describe UsersController do
       it "should render the 'new' page" do
         post :create, :user => @attr
         response.should render_template('new')
+      end
+
+      it "should reset the password fields" do
+        post :create, :user => @attr.merge({ :password => 'foobar', 
+                                             :password_confirmation => 'foobar' })
+        response.should have_selector('input[type="password"][value=""]')
       end
     end
 
