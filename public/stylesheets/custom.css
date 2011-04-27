@@ -255,3 +255,14 @@ form.new_micropost textarea {
   margin-bottom: 0;
 }
 
+/* Character count */
+
+span.remaining {
+  font-size: 80%;
+  display: block;
+}
+
+span.remaining.nomore {
+  color: red;
+}
+
