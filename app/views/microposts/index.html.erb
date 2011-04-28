@@ -1,0 +1,10 @@
+<h1>Microposts for <%= @user.name %></h1>
+
+<%= will_paginate %>
+
+<table class="microposts" summary="User microposts">
+  <%= render :partial => 'micropost', :collection => @microposts %>
+</table>
+
+<%= will_paginate %>
+
