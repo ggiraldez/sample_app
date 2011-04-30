@@ -2,7 +2,7 @@
 // This file is automatically included by javascript_include_tag :defaults
 (function() {
 
-  document.observe('dom:loaded', function() {
+  document.on('dom:loaded', function() {
     $$('textarea#micropost_content').each(function(field) {
       var label;
 
@@ -15,13 +15,12 @@
       }
 
       label = document.createElement('span');
-      label.addClassName('remaining');
-      label.innerHTML = format(140);
+      label.addClassName('remaining').update(format(140));
       field.insert({ after: label });
       
       field.on('keyup', function(evt) {
         var count = 140 - $F(field).length;
-        label.innerHTML = format(count);
+        label.update(format(count));
         if (count > 0) {
           label.removeClassName('nomore');
         } else {
